@@ -19,9 +19,9 @@
 
     <div class="nav-bg">
         <nav class="navegacion-principal contenedor">
-            <a href="#">Vehiculos</a>
-            <a href="#">Marcas</a>
-            <a href="#">Modelos</a>
+            <a href="{{ route('home') }}">Vehiculos</a>
+            <a href="{{ route('marcas') }}">Marcas</a>
+            <a href="{{ route('modelos') }}">Modelos</a>
         </nav>
     </div>
 

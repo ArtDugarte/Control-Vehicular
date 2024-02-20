@@ -77,17 +77,31 @@ class Vehiculo extends Component
             'fecha_ingreso' => $this -> fecha_ingreso,
             'modelo_id' => $this -> modelo_id
         ]);
-
+        $this->resetForm();
         $this -> feedback = 'Vehículo registrado';
     }
 
     public function update($id) {
         if($this -> modelo_id == 0) return;
+
+        $vehiculo = MVehiculo::find($id);
+        
+        if ($vehiculo) {
+            $vehiculo->placa = $this -> placa;
+            $vehiculo->color = $this -> color;
+            $vehiculo->anio = $this -> anio;
+            $vehiculo->fecha_ingreso = $this -> fecha_ingreso;
+            $vehiculo->modelo_id = $this -> modelo_id;
+            $vehiculo->save();
+            $this->resetForm();
+            $this -> feedback = 'Vehículo actualizado';
+        }
     }
 
     public function destroy($id)
     {
         MVehiculo::destroy($id);
+        $this->resetForm();
         $this -> feedback = 'Vehículo eliminado';
     }
 }
