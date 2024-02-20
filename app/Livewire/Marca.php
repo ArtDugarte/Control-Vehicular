@@ -3,11 +3,15 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Marca as MMarca;
 
 class Marca extends Component
 {
+    public $feedback = '';
+
     public function render()
     {
-        return view('livewire.marca');
+        $marcas = MMarca::all();
+        return view('livewire.marca', compact('marcas'));
     }
 }
