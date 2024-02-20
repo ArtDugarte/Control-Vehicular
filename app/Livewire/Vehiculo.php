@@ -3,11 +3,14 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Vehiculo as MVehiculo;
 
 class Vehiculo extends Component
 {
     public function render()
     {
-        return view('livewire.vehiculo');
+        $vehiculos = MVehiculo::all();
+
+        return view('livewire.vehiculo', compact('vehiculos'));
     }
 }
