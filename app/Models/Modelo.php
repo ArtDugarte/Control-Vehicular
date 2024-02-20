@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Modelo extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['nombre', 'marca_id'];
+
+    protected $casts = [
+        'id' => 'integer',
+        'nombre' => 'string',
+        'marca_id' => 'integer',
+    ];
+}
