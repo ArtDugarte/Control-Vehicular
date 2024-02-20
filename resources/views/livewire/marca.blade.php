@@ -7,13 +7,16 @@
 
     <ul>
         @forelse ($marcas as $marca)
-            <li>
-                <button wire:click="setMarca({{ $marca->id }})">
-                    {{ $marca->nombre }}
-                </button>
-            </li>
+            <li>{{ $marca->nombre }}</li>
         @empty
             <p>No hay marcas registradas</p>
         @endforelse
     </ul>
+
+    <form method="POST">
+        <label for="">Nombre</label>
+        <input type="text" wire:model.live="nombre">
+        <button type="button" wire:click="store()">Guardar</button>
+        <button type="button" wire:click="resetForm()">Limpiar</button>
+    </form>
 </div>

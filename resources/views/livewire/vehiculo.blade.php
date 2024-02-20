@@ -22,7 +22,7 @@
     </ul>
 
     <div>
-        <form>
+        <form method="POST">
             <label for="">Marcas</label>
             <select wire:model.live="marca_id" wire:change="setModelos($event.target.value)">
                 <option value="0">Seleccione una marca</option>
@@ -58,7 +58,6 @@
             @endif
 
             <button type="button" wire:click="resetForm()">Limpiar</button>
-            
         </form>
     </div>
 </div>
