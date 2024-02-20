@@ -16,6 +16,8 @@ class Vehiculo extends Component
     public $modelo_id = 0;
     public $marca_id = 0;
     public $feedback = '';
+    public $editando = false;
+    public $vehiculo_id = 0;
 
     public function render()
     {
@@ -26,9 +28,42 @@ class Vehiculo extends Component
         return view('livewire.vehiculo', compact('vehiculos', 'marcas', 'modelos'));
     }
 
+    public function resetForm() {
+        $this->placa = '';
+        $this->color = '';
+        $this->anio = '';
+        $this->fecha_ingreso = '';
+        $this->modelo_id = 0;
+        $this->marca_id = 0;
+        $this->feedback = '';
+        $this->editando = false;
+        $this->vehiculo_id = 0;
+    }
+
+
     public function setModelos($marca_id)
-    {
+    {  
+        $this->marca_id = $marca_id;
         $this->modelos = MModelo::where('marca_id', $marca_id)->get();
+        $this->modelo_id = 0;
+        
+    }
+
+    public function setVehiculo($id)
+    {
+        $vehiculo = MVehiculo::find($id);
+
+        if ($vehiculo) {
+            $this->placa = $vehiculo->placa;
+            $this->color = $vehiculo->color;
+            $this->anio = $vehiculo->anio;
+            $this->fecha_ingreso = $vehiculo->fecha_ingreso->format('Y-m-d');
+            $aux = $vehiculo->modelo_id;
+            $this->marca_id = MModelo::find($vehiculo->modelo_id)->marca_id;
+            $this->modelo_id = $aux;
+            $this->editando = true;
+            $this->vehiculo_id = $id;
+        }
     }
 
     public function store()
@@ -44,5 +79,15 @@ class Vehiculo extends Component
         ]);
 
         $this -> feedback = 'Vehículo registrado';
+    }
+
+    public function update($id) {
+        if($this -> modelo_id == 0) return;
+    }
+
+    public function destroy($id)
+    {
+        MVehiculo::destroy($id);
+        $this -> feedback = 'Vehículo eliminado';
     }
 }
