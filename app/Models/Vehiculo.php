@@ -9,11 +9,12 @@ class Vehiculo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['placa', 'color', 'modelo_id', 'fecha_ingreso'];
+    protected $fillable = ['placa', 'anio', 'color', 'modelo_id', 'fecha_ingreso'];
 
     protected $casts = [
         'id' => 'integer',
         'placa' => 'string',
+        'anio' => 'integer',
         'color' => 'string',
         'modelo_id' => 'integer',
         'fecha_ingreso' => 'date',
