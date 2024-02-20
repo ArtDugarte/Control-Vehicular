@@ -10,7 +10,8 @@ class Modelo extends Component
 {
 
     public $feedback = '';
-    public $marcas = [];
+    public $marca_id = 0;
+    public $nombre = '';
 
     public function render()
     {
@@ -23,5 +24,21 @@ class Modelo extends Component
         }
 
         return view('livewire.modelo', compact('modelos', 'marcas'));
+    }
+
+    public function resetForm() {
+        $this->nombre = '';
+        $this->marca_id = 0;
+        $this->feedback = '';
+    }
+    
+    public function store()
+    {
+        MModelo::create([
+            'nombre' => $this -> nombre,
+            'marca_id' => $this -> marca_id
+        ]);
+        $this->resetForm();
+        $this -> feedback = 'Modelo registrado';
     }
 }
