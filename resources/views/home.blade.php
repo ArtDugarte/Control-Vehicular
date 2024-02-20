@@ -3,7 +3,7 @@
 @section('title', '| Vehiculos')
 
 @section('content')
-    <h1>Lista de Vehiculos</h1>
+    <h1>Vehiculos</h1>
 
     <livewire:vehiculo />
 @endsection
