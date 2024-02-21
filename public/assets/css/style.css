@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=REM:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   	--verde: #13b256;
   	--verde-oscuro: #003333;
@@ -5,7 +7,7 @@
   	--negro: #000;
   	--fondo: #e2e2e2;
 
-  	--fuente-principal: Arial, Helvetica, sans-serif;;
+  	--fuente-principal: 'REM', sans-serif;
 }
 
 * {
@@ -55,9 +57,18 @@ a {
 
 .titulo {
 	font-size: 3.8rem;
-	color: var(--negro);
+	color: var(--verde-oscuro);
 	text-align: center;
 	margin-bottom: 2rem;
+}
+
+span.nombre {
+	cursor: normal !important;
+	margin: 0 !important;
+	
+	&:hover {
+		color: var(--blanco) !important;
+	}
 }
 
 /* Header */
@@ -153,6 +164,12 @@ a {
 		scrollbar-color: var(--verde-oscuro) var(--blanco);
     	scrollbar-width: thin;
 
+		& .vacio {
+			text-align: center;
+			font-size: 1.5rem;
+			color: var(--verde-oscuro);
+		}
+
 		& .item {
 			background-color: var(--verde);
 			color: var(--blanco);
@@ -207,6 +224,7 @@ a {
 
 			& label {
 				font-weight: bold;
+				color: var(--verde-oscuro);
 			}
 
 			& input, & select {
@@ -247,7 +265,6 @@ a {
 				
 				&:hover {
 					background-color: var(--verde-oscuro);
-
 				}
 			}
 		}

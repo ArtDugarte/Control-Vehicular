@@ -9,7 +9,7 @@
 
         <ul class="lista">
             @forelse ($modelos as $modelo)
-                <li class="item">{{ $modelo->nombre }} ({{ $modelo->nombre_marca }})</li>
+                <li class="item"><span class="nombre">{{ $modelo->nombre }} ({{ $modelo->nombre_marca }})</span></li>
             @empty
                 <p class="vacio">No hay modelos registradas</p>
             @endforelse
@@ -20,8 +20,8 @@
         <form method="POST" class="formulario">
 
             <div class="campo">
-                <label for="">Marcas</label>
-                <select wire:model.live="marca_id">
+                <label for="marcas">Marcas</label>
+                <select id="marcas" wire:model.live="marca_id">
                     <option value="0">Seleccione una marca</option>
                     @foreach ($marcas as $marca)
                         <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
@@ -31,8 +31,8 @@
             </div>
             
             <div class="campo">
-                <label for="">Nombre</label>
-                <input type="text" wire:model.live="nombre">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="text" wire:model.live="nombre">
                 @error('nombre') <span class="error">{{ $message }}</span> @enderror
             </div>
             

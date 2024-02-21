@@ -40,8 +40,8 @@
 
             
             <div class="campo">
-                <label for="">Modelos</label>
-                <select wire:model.live="modelo_id">
+                <label for="modelos">Modelos</label>
+                <select id="modelos" wire:model.live="modelo_id">
                     <option value="0">Seleccione un modelo</option>
                     @foreach ($modelos as $modelo)
                         <option {{ $modelo->id == $modelo_id ? 'selected' : '' }} value="{{ $modelo->id }}">{{ $modelo->nombre }}</option>
@@ -52,28 +52,28 @@
 
             
             <div class="campo">
-                <label for="">Placa</label>
-                <input type="text" wire:model.live="placa">
+                <label for="placa">Placa</label>
+                <input id="placa" type="text" wire:model.live="placa">
                 @error('placa') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             
             <div class="campo">
-                <label for="">Año</label>
-                <input type="text" wire:model.live="anio">
+                <label for="anio">Año</label>
+                <input id="anio" type="text" wire:model.live="anio">
                 @error('anio') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             
             <div class="campo">
-                <label for="">Color</label>
-                <input type="text" wire:model.live="color">
+                <label for="color">Color</label>
+                <input id="color" type="text" wire:model.live="color">
                 @error('color') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="campo">
-                <label for="">Fecha de Ingreso</label>
-                <input type="date" wire:model.live="fecha_ingreso" max="{{ date('Y-m-d') }}">
+                <label for="fecha_ingreso">Fecha de Ingreso</label>
+                <input id="fecha_ingreso" type="date" wire:model.live="fecha_ingreso" max="{{ date('Y-m-d') }}">
                 @error('fecha_ingreso') <span class="error">{{ $message }}</span> @enderror
             </div>
 

@@ -4,14 +4,12 @@
         <div class="feedback">{{ $feedback }}</div>
     @endif
 
-    
-
     <div class="listado">
         <h3 class="titulo">Listado de Marcas</h3>
 
         <ul class="lista">
             @forelse ($marcas as $marca)
-                <li class="item">{{ $marca->nombre }}</li>
+                <li class="item"> <span class="nombre">{{ $marca->nombre }}</span></li>
             @empty
                 <p class="vacio">No hay marcas registradas</p>
             @endforelse
@@ -22,8 +20,8 @@
         <form method="POST" class="formulario">
 
             <div class="campo">
-                <label for="">Nombre</label>
-                <input type="text" wire:model.live="nombre">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="text" wire:model.live="nombre">
                 @error('nombre') <span class="error">{{ $message }}</span> @enderror
             </div>
             
