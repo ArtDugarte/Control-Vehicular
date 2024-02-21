@@ -12,7 +12,7 @@ class Marca extends Component
 
     public function render()
     {
-        $marcas = MMarca::all();
+        $marcas = MMarca::all() -> sortBy('nombre');
         return view('livewire.marca', compact('marcas'));
     }
 

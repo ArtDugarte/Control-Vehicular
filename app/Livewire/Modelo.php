@@ -15,7 +15,7 @@ class Modelo extends Component
 
     public function render()
     {
-        $modelos = MModelo::all();
+        $modelos = MModelo::all() -> sortBy('nombre');
         $marcas = MMarca::all();
     
         foreach ($modelos as $modelo) {

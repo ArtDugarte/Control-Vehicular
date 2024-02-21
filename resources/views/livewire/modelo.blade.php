@@ -4,33 +4,43 @@
         <div class="feedback">{{ $feedback }}</div>
     @endif
 
-    <h3>Listado de Modelos</h3>
+    <div class="listado">
+        <h3 class="titulo">Listado de Modelos</h3>
 
-    <ul>
-        @forelse ($modelos as $modelo)
-            <li>{{ $modelo->nombre_marca }}  {{ $modelo->nombre }}</li>
-        @empty
-            <p>No hay modelos registradas</p>
-        @endforelse
-    </ul>
+        <ul class="lista">
+            @forelse ($modelos as $modelo)
+                <li class="item">{{ $modelo->nombre }} ({{ $modelo->nombre_marca }})</li>
+            @empty
+                <p class="vacio">No hay modelos registradas</p>
+            @endforelse
+        </ul>
+    </div>
+    
+    <div class="contenedor">
+        <form method="POST" class="formulario">
 
-    <form method="POST">
-
-        
-        <label for="">Marcas</label>
-        <select wire:model.live="marca_id">
-            <option value="0">Seleccione una marca</option>
-            @foreach ($marcas as $marca)
-                <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
-            @endforeach
-        </select>
-        @error('marca_id') <span class="error">{{ $message }}</span> @enderror
-
-        <label for="">Nombre</label>
-        <input type="text" wire:model.live="nombre">
-        @error('nombre') <span class="error">{{ $message }}</span> @enderror
-        
-        <button type="button" wire:click="store()">Guardar</button>
-        <button type="button" wire:click="resetForm()">Limpiar</button>
-    </form>
+            <div class="campo">
+                <label for="">Marcas</label>
+                <select wire:model.live="marca_id">
+                    <option value="0">Seleccione una marca</option>
+                    @foreach ($marcas as $marca)
+                        <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
+                    @endforeach
+                </select>
+                @error('marca_id') <span class="error">{{ $message }}</span> @enderror
+            </div>
+            
+            <div class="campo">
+                <label for="">Nombre</label>
+                <input type="text" wire:model.live="nombre">
+                @error('nombre') <span class="error">{{ $message }}</span> @enderror
+            </div>
+            
+            <div class="botones">
+                <button type="button" wire:click="resetForm()">Limpiar</button>
+                <button type="button" wire:click="store()">Guardar</button>
+            </div>
+            
+        </form>
+    </div>
 </div>

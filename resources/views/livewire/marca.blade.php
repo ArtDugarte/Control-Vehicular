@@ -7,7 +7,6 @@
     
 
     <div class="listado">
-
         <h3 class="titulo">Listado de Marcas</h3>
 
         <ul class="lista">
