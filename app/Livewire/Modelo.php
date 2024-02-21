@@ -26,6 +26,20 @@ class Modelo extends Component
         return view('livewire.modelo', compact('modelos', 'marcas'));
     }
 
+    public function rules() {
+        return [
+            'nombre' => 'required',
+            'marca_id' => 'required|numeric|min:1'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'nombre.required' => 'El nombre es requerido',
+            'marca_id.min' => 'La marca es requerida'
+        ];
+    }
+
     public function resetForm() {
         $this->nombre = '';
         $this->marca_id = 0;
@@ -34,6 +48,9 @@ class Modelo extends Component
     
     public function store()
     {
+
+        $this->validate();
+
         MModelo::create([
             'nombre' => $this -> nombre,
             'marca_id' => $this -> marca_id

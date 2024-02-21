@@ -23,9 +23,11 @@
                 <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
             @endforeach
         </select>
+        @error('marca_id') <span class="error">{{ $message }}</span> @enderror
 
         <label for="">Nombre</label>
         <input type="text" wire:model.live="nombre">
+        @error('nombre') <span class="error">{{ $message }}</span> @enderror
         
         <button type="button" wire:click="store()">Guardar</button>
         <button type="button" wire:click="resetForm()">Limpiar</button>
