@@ -16,6 +16,20 @@ class Marca extends Component
         return view('livewire.marca', compact('marcas'));
     }
 
+    public function rules()
+    {
+        return [
+            'nombre' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'El nombre es requerido',
+        ];
+    }
+
     public function resetForm()
     {
         $this->feedback = '';
@@ -24,6 +38,9 @@ class Marca extends Component
 
     public function store()
     {
+
+        $this->validate();
+
         MMarca::create([
             'nombre' => $this->nombre
         ]);
