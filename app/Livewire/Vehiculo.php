@@ -28,6 +28,11 @@ class Vehiculo extends Component
         return view('livewire.vehiculo', compact('vehiculos', 'marcas', 'modelos'));
     }
 
+    public function mount()
+    {
+        $this -> fecha_ingreso = date('Y-m-d');
+    }
+
     public function rules()
     {
         return [
@@ -58,7 +63,7 @@ class Vehiculo extends Component
         $this->placa = '';
         $this->color = '';
         $this->anio = '';
-        $this->fecha_ingreso = '';
+        $this->fecha_ingreso = date('Y-m-d');
         $this->modelo_id = 0;
         $this->marca_id = 0;
         $this->feedback = '';
