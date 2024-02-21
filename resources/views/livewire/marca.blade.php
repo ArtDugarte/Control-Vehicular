@@ -1,23 +1,38 @@
-<div>
-    <h3>Listado de Marcas</h3>
+<div class="carta">
 
-    <div>
-        {{ $feedback }}
+    @if($feedback)
+        <div class="feedback">{{ $feedback }}</div>
+    @endif
+
+    
+
+    <div class="listado">
+
+        <h3 class="titulo">Listado de Marcas</h3>
+
+        <ul class="lista">
+            @forelse ($marcas as $marca)
+                <li class="item">{{ $marca->nombre }}</li>
+            @empty
+                <p class="vacio">No hay marcas registradas</p>
+            @endforelse
+        </ul>
     </div>
 
-    <ul>
-        @forelse ($marcas as $marca)
-            <li>{{ $marca->nombre }}</li>
-        @empty
-            <p>No hay marcas registradas</p>
-        @endforelse
-    </ul>
+    <div class="contenedor">
+        <form method="POST" class="formulario">
 
-    <form method="POST">
-        <label for="">Nombre</label>
-        <input type="text" wire:model.live="nombre">
-        @error('nombre') <span class="error">{{ $message }}</span> @enderror
-        <button type="button" wire:click="store()">Guardar</button>
-        <button type="button" wire:click="resetForm()">Limpiar</button>
-    </form>
+            <div class="campo">
+                <label for="">Nombre</label>
+                <input type="text" wire:model.live="nombre">
+                @error('nombre') <span class="error">{{ $message }}</span> @enderror
+            </div>
+            
+            <div class="botones">
+                <button type="button" wire:click="resetForm()">Limpiar</button>
+                <button type="button" wire:click="store()">Guardar</button>
+            </div>
+
+        </form>
+    </div>
 </div>

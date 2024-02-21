@@ -86,6 +86,7 @@
                     <button type="button" wire:click="store()">Guardar</button>
                 @endif
             </div>
+            
         </form>
     </div>
 </div>

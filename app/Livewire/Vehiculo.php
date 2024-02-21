@@ -21,7 +21,7 @@ class Vehiculo extends Component
 
     public function render()
     {
-        $vehiculos = MVehiculo::all();
+        $vehiculos = MVehiculo::all() -> sortBy('placa');
         $marcas = MMarca::all();
         $modelos = MModelo::where('marca_id', $this->marca_id)->get();
 

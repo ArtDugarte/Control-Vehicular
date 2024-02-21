@@ -1,9 +1,10 @@
-<div>
-    <h3>Listado de Modelos</h3>
+<div class="carta">
 
-    <div>
-        {{ $feedback }}
-    </div>
+    @if($feedback)
+        <div class="feedback">{{ $feedback }}</div>
+    @endif
+
+    <h3>Listado de Modelos</h3>
 
     <ul>
         @forelse ($modelos as $modelo)

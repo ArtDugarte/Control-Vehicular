@@ -147,7 +147,7 @@ a {
 		gap: 1rem;
 		flex-direction: column;
 		max-height: 60rem;
-		overflow-y: scroll;
+		overflow-y: auto;
 		border-radius: .5rem;
 
 		scrollbar-color: var(--verde-oscuro) var(--blanco);
