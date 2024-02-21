@@ -28,6 +28,32 @@ class Vehiculo extends Component
         return view('livewire.vehiculo', compact('vehiculos', 'marcas', 'modelos'));
     }
 
+    public function rules()
+    {
+        return [
+            'placa' => 'required|regex:/^[A-Za-z0-9]{6,7}$/',
+            'color' => 'required|regex:/^[A-Za-z\s]{3,}$/',
+            'anio' => 'required|regex:/^[0-9]{4}$/',
+            'fecha_ingreso' => 'required|date|before_or_equal:today',
+            'modelo_id' => 'required|numeric|min:1'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'placa.required' => 'La placa es requerida',
+            'placa.regex' => 'La placa debe ser de 6 o 7 caracteres alfanuméricos sin espacios ni guiones',
+            'color.required' => 'El color es requerido',
+            'color.regex' => 'El color debe ser de 3 o más caracteres alfanuméricos',
+            'anio.required' => 'El año es requerido',
+            'anio.regex' => 'El año debe ser de 4 dígitos',
+            'fecha_ingreso.required' => 'La fecha de ingreso es requerida',
+            'fecha_ingreso.before_or_equal' => 'La fecha de ingreso debe ser anterior o igual a la fecha actual',
+            'modelo_id.min' => 'El modelo es requerido'
+        ];
+    }
+
     public function resetForm() {
         $this->placa = '';
         $this->color = '';
@@ -39,7 +65,6 @@ class Vehiculo extends Component
         $this->editando = false;
         $this->vehiculo_id = 0;
     }
-
 
     public function setModelos($marca_id)
     {  
@@ -68,10 +93,10 @@ class Vehiculo extends Component
 
     public function store()
     {
-        if($this -> modelo_id == 0) return;
+        $this->validate();
 
         MVehiculo::create([
-            'placa' => $this -> placa,
+            'placa' => strtoupper($this -> placa),
             'color' => $this -> color,
             'anio' => $this -> anio,
             'fecha_ingreso' => $this -> fecha_ingreso,
@@ -82,12 +107,12 @@ class Vehiculo extends Component
     }
 
     public function update($id) {
-        if($this -> modelo_id == 0) return;
-
+        
+        $this->validate();
         $vehiculo = MVehiculo::find($id);
         
         if ($vehiculo) {
-            $vehiculo->placa = $this -> placa;
+            $vehiculo->placa = strtoupper($this -> placa);
             $vehiculo->color = $this -> color;
             $vehiculo->anio = $this -> anio;
             $vehiculo->fecha_ingreso = $this -> fecha_ingreso;

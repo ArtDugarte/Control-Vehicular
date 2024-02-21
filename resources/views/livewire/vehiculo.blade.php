@@ -38,18 +38,23 @@
                     <option {{ $modelo->id == $modelo_id ? 'selected' : '' }} value="{{ $modelo->id }}">{{ $modelo->nombre }}</option>
                 @endforeach
             </select>
+            @error('modelo_id') <span class="error">{{ $message }}</span> @enderror
 
             <label for="">Placa</label>
             <input type="text" wire:model.live="placa">
+            @error('placa') <span class="error">{{ $message }}</span> @enderror
 
             <label for="">Año</label>
             <input type="text" wire:model.live="anio">
+            @error('anio') <span class="error">{{ $message }}</span> @enderror
 
             <label for="">Color</label>
             <input type="text" wire:model.live="color">
+            @error('color') <span class="error">{{ $message }}</span> @enderror
 
             <label for="">Fecha de Ingreso</label>
             <input type="date" wire:model.live="fecha_ingreso">
+            @error('fecha_ingreso') <span class="error">{{ $message }}</span> @enderror
 
             @if($editando)
                 <button type="button" wire:click="update({{ $vehiculo_id }})">Editar</button>
