@@ -1,25 +1,29 @@
-<div>
-    <h3>Listado de Vehiculos</h3>
+<div class="carta">
 
-    <div>
-        {{ $feedback }}
+    @if($feedback)
+        <div class="feedback">{{ $feedback }}</div>
+    @endif
+
+    <div class="listado">
+
+        <h3 class="titulo">Listado de Vehiculos</h3>
+
+        <ul class="lista">
+            @forelse ($vehiculos as $vehiculo)
+                <li class="item">
+                    <button title="Consultar" class="nombre" wire:click="setVehiculo({{ $vehiculo->id }})">
+                        {{ $vehiculo->placa }}
+                    </button>
+                
+                    <button title="Eliminar" class="eliminar" wire:click="destroy({{ $vehiculo->id }})">
+                        ×
+                    </button>
+                </li>
+            @empty
+                <p class="vacio">No hay vehiculos registrados</p>
+            @endforelse
+        </ul>
     </div>
-
-    <ul>
-        @forelse ($vehiculos as $vehiculo)
-            <li>
-                <button wire:click="setVehiculo({{ $vehiculo->id }})">
-                    {{ $vehiculo->placa }}
-                </button>
-            
-                <button wire:click="destroy({{ $vehiculo->id }})">
-                    X
-                </button>
-            </li>
-        @empty
-            <p>No hay vehiculos registrados</p>
-        @endforelse
-    </ul>
 
     <div>
         <form method="POST">

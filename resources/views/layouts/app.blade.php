@@ -11,19 +11,18 @@
 </head>
 <body>
 
-    <header>
+    <header class="header">
         <div class="contenedor-titulo">
-            <h1 class="titulo">Sysprim Control Vehicular</h1>
+            <h1 class="titulo">Sysprim - Control Vehicular</h1>
         </div>
+   
+        <nav class="navegacion-principal">
+            <a class="link" href="{{ route('home') }}">Vehiculos</a>
+            <a class="link" href="{{ route('marcas') }}">Marcas</a>
+            <a class="link" href="{{ route('modelos') }}">Modelos</a>
+        </nav>
     </header>
 
-    <div class="nav-bg">
-        <nav class="navegacion-principal contenedor">
-            <a href="{{ route('home') }}">Vehiculos</a>
-            <a href="{{ route('marcas') }}">Marcas</a>
-            <a href="{{ route('modelos') }}">Modelos</a>
-        </nav>
-    </div>
 
     @yield('content')
     @livewireScripts
