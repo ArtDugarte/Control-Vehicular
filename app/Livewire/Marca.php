@@ -10,11 +10,18 @@ class Marca extends Component
     public $feedback = '';
     public $feedbackError = '';
     public $nombre = '';
+    public $filter = '';
+    public $marcas = [];
 
     public function render()
     {
-        $marcas = MMarca::all() -> sortBy('nombre');
+        $marcas = $this->marcas;
         return view('livewire.marca', compact('marcas'));
+    }
+
+    public function mount()
+    {
+        $this->marcas = MMarca::all()->sortBy('nombre');
     }
 
     public function rules()
@@ -36,6 +43,14 @@ class Marca extends Component
         $this->feedback = '';
         $this->feedbackError = '';
         $this->nombre = '';
+        $this->filter = '';
+        $this->marcas = MMarca::all()->sortBy('nombre');
+    }
+
+    public function setMarcas()
+    {
+        $nombre = strtoupper($this->filter);
+        $this->marcas = MMarca::where('nombre', 'like', '%'.$nombre.'%')->get()->sortBy('nombre');
     }
 
     public function store()

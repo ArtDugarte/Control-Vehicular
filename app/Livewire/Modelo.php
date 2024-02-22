@@ -13,10 +13,12 @@ class Modelo extends Component
     public $feedbackError = '';
     public $marca_id = 0;
     public $nombre = '';
+    public $filter = '';
+    public $modelos = [];
 
     public function render()
     {
-        $modelos = MModelo::all() -> sortBy('nombre');
+        $modelos = $this->modelos;
         $marcas = MMarca::all();
     
         foreach ($modelos as $modelo) {
@@ -25,6 +27,10 @@ class Modelo extends Component
         }
 
         return view('livewire.modelo', compact('modelos', 'marcas'));
+    }
+
+    public function mount() {
+        $this->modelos = MModelo::all()->sortBy('nombre');
     }
 
     public function rules() {
@@ -46,6 +52,13 @@ class Modelo extends Component
         $this->marca_id = 0;
         $this->feedback = '';
         $this->feedbackError = '';
+        $this->modelos = MModelo::all()->sortBy('nombre');
+        $this->filter = '';
+    }
+
+    public function setModelos(){
+        $modelo = strtoupper($this->filter);
+        $this->modelos = MModelo::where('nombre', 'like', '%'.$modelo.'%')->get()->sortBy('nombre');
     }
     
     public function store()

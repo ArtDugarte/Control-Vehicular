@@ -19,10 +19,12 @@ class Vehiculo extends Component
     public $feedbackError = '';
     public $editando = false;
     public $vehiculo_id = 0;
+    public $placa_filter = '';
+    public $vehiculos = [];
 
     public function render()
     {
-        $vehiculos = MVehiculo::all() -> sortBy('placa');
+        $vehiculos = $this->vehiculos;
         $marcas = MMarca::all();
         $modelos = MModelo::where('marca_id', $this->marca_id)->get();
 
@@ -31,7 +33,8 @@ class Vehiculo extends Component
 
     public function mount()
     {
-        $this -> fecha_ingreso = date('Y-m-d');
+        $this->fecha_ingreso = date('Y-m-d');
+        $this->vehiculos = MVehiculo::all()->sortBy('placa');
     }
 
     public function rules()
@@ -71,6 +74,13 @@ class Vehiculo extends Component
         $this->feedbackError = '';
         $this->editando = false;
         $this->vehiculo_id = 0;
+        $this->vehiculos = MVehiculo::all()->sortBy('placa');
+        $this->placa_filter = '';
+    }
+
+    public function setVehiculos(){
+        $placa = strtoupper($this->placa_filter);
+        $this->vehiculos = MVehiculo::where('placa', 'like', '%'.$placa.'%')->get()->sortBy('placa');
     }
 
     public function setModelos($marca_id)

@@ -12,6 +12,11 @@
 
         <h3 class="titulo">Listado de Vehiculos</h3>
 
+        <div class="campo filtrado">
+            <label for="filter">Placa</label>
+            <input id="filter" type="text" wire:model.live="placa_filter" wire:keyup="setVehiculos()" placeholder="Buscar por placa">
+        </div>
+
         <ul class="lista">
             @forelse ($vehiculos as $vehiculo)
                 <li class="item">

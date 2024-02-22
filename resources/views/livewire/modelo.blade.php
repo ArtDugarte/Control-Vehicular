@@ -9,7 +9,13 @@
     @endif
 
     <div class="listado">
+
         <h3 class="titulo">Listado de Modelos</h3>
+
+        <div class="campo filtrado">
+            <label for="filter">Modelo</label>
+            <input id="filter" type="text" wire:model.live="filter" wire:keyup="setModelos()" placeholder="Buscar por nombre">
+        </div>
 
         <ul class="lista">
             @forelse ($modelos as $modelo)
