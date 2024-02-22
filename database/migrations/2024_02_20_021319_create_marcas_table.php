@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('marcas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre', 255)->unique();
+            $table->id()->autoIncrement();
+            $table->string('nombre', 255)->collation('utf8mb4_general_ci')->unique()->required();
             $table->timestamps();
         });
     }

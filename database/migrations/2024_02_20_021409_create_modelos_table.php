@@ -9,11 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('modelos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre', 255)->unique();
+            $table->id()->autoIncrement();
+            $table->string('nombre', 255)->collation('utf8mb4_general_ci')->required();
             $table->unsignedBigInteger('marca_id')->required();
             $table->foreign('marca_id')->references('id')->on('marcas')->onDelete('cascade');
             $table->timestamps();
+            $table->unique(['nombre', 'marca_id']);
         });
     }
 

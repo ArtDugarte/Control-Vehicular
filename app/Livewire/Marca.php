@@ -8,6 +8,7 @@ use App\Models\Marca as MMarca;
 class Marca extends Component
 {
     public $feedback = '';
+    public $feedbackError = '';
     public $nombre = '';
 
     public function render()
@@ -33,18 +34,30 @@ class Marca extends Component
     public function resetForm()
     {
         $this->feedback = '';
+        $this->feedbackError = '';
         $this->nombre = '';
     }
 
     public function store()
     {
-
         $this->validate();
 
-        MMarca::create([
-            'nombre' => $this->nombre
-        ]);
-        $this->resetForm();
-        $this->feedback = 'Marca registrada';
+        try{
+            MMarca::create([
+                'nombre' => trim($this->nombre)
+            ]);
+
+            $this->resetForm();
+            $this->feedback = 'Marca registrada';
+        } catch (\Throwable $th){  
+
+            $this->feedback='';
+            
+            if ($th->errorInfo[1] == 1062) {
+                $this->feedbackError = 'Ya existe una marca con ese nombre';
+            }else {
+                $this->feedbackError = 'Error al registrar la marca';
+            }
+        }
     }
 }

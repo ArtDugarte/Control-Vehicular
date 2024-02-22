@@ -10,6 +10,7 @@ class Modelo extends Component
 {
 
     public $feedback = '';
+    public $feedbackError = '';
     public $marca_id = 0;
     public $nombre = '';
 
@@ -44,18 +45,27 @@ class Modelo extends Component
         $this->nombre = '';
         $this->marca_id = 0;
         $this->feedback = '';
+        $this->feedbackError = '';
     }
     
     public function store()
     {
-
         $this->validate();
 
-        MModelo::create([
-            'nombre' => $this -> nombre,
-            'marca_id' => $this -> marca_id
-        ]);
-        $this->resetForm();
-        $this -> feedback = 'Modelo registrado';
+        try {
+            MModelo::create([
+                'nombre' => trim($this->nombre),
+                'marca_id' => $this->marca_id
+            ]);
+            $this->resetForm();
+            $this->feedback = 'Modelo registrado';
+        } catch (\Exception $e) {
+            $this->feedback = '';
+            if ($e->getCode() == '23000') {
+                $this->feedbackError = 'Ya existe un modelo con este nombre';
+            } else {
+                $this->feedbackError = 'Error al registrar el modelo';
+            }
+        }
     }
 }

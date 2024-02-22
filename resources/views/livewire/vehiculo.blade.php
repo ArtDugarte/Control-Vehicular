@@ -4,6 +4,10 @@
         <div class="feedback">{{ $feedback }}</div>
     @endif
 
+    @if($feedbackError)
+        <div class="feedback feedback-error">{{ $feedbackError }}</div>
+    @endif
+
     <div class="listado">
 
         <h3 class="titulo">Listado de Vehiculos</h3>

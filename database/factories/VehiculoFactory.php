@@ -16,7 +16,7 @@ class VehiculoFactory extends Factory
         $currentYear = Date::now()->year;
 
         return [
-            'placa' => fake()->unique()->bothify('???####'),
+            'placa' => strtoupper(fake()->unique()->bothify('???####')),
             'anio' => fake()->numberBetween(1985, $currentYear),
             'color' => fake()->randomElement($this->colores),
             'fecha_ingreso' => fake()->dateTimeBetween('-1 year', 'now'),

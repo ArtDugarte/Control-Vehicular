@@ -63,9 +63,10 @@ a {
 }
 
 span.nombre {
-	cursor: normal !important;
+	cursor: default !important;
 	margin: 0 !important;
-	
+	text-align: left !important;
+
 	&:hover {
 		color: var(--blanco) !important;
 	}
@@ -148,6 +149,10 @@ span.nombre {
 		text-transform: uppercase;
 		text-align: center;
 		font-weight: 700;
+	}
+
+	& .feedback-error {
+		background-color: rgba(165, 0, 0, 0.699);
 	}
 
 	& .lista {

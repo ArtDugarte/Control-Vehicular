@@ -16,6 +16,7 @@ class Vehiculo extends Component
     public $modelo_id = 0;
     public $marca_id = 0;
     public $feedback = '';
+    public $feedbackError = '';
     public $editando = false;
     public $vehiculo_id = 0;
 
@@ -67,6 +68,7 @@ class Vehiculo extends Component
         $this->modelo_id = 0;
         $this->marca_id = 0;
         $this->feedback = '';
+        $this->feedbackError = '';
         $this->editando = false;
         $this->vehiculo_id = 0;
     }
@@ -100,38 +102,62 @@ class Vehiculo extends Component
     {
         $this->validate();
 
-        MVehiculo::create([
-            'placa' => strtoupper($this -> placa),
-            'color' => $this -> color,
-            'anio' => $this -> anio,
-            'fecha_ingreso' => $this -> fecha_ingreso,
-            'modelo_id' => $this -> modelo_id
-        ]);
-        $this->resetForm();
-        $this -> feedback = 'Vehículo registrado';
+        try {
+            MVehiculo::create([
+                'placa' => strtoupper($this->placa),
+                'color' => trim($this->color),
+                'anio' => trim($this->anio),
+                'fecha_ingreso' => $this->fecha_ingreso,
+                'modelo_id' => $this->modelo_id
+            ]);
+            $this->resetForm();
+            $this->feedback = 'Vehículo registrado';
+        } catch (Exception $e) {
+            $this->feedback = '';
+            if ($e->getCode() == 23000) {
+                $this->feedbackError = 'Ya existe un vehículo registrado con esta placa';
+            } else {
+                $this->feedbackError = 'No se pudo registrar el vehículo';
+            }
+        }
     }
 
-    public function update($id) {
-        
+    public function update($id)
+    {
         $this->validate();
-        $vehiculo = MVehiculo::find($id);
-        
-        if ($vehiculo) {
-            $vehiculo->placa = strtoupper($this -> placa);
-            $vehiculo->color = $this -> color;
-            $vehiculo->anio = $this -> anio;
-            $vehiculo->fecha_ingreso = $this -> fecha_ingreso;
-            $vehiculo->modelo_id = $this -> modelo_id;
-            $vehiculo->save();
-            $this->resetForm();
-            $this -> feedback = 'Vehículo actualizado';
+
+        try {
+            $vehiculo = MVehiculo::find($id);
+
+            if ($vehiculo) {
+                $vehiculo->placa = strtoupper($this->placa);
+                $vehiculo->color = trim($this->color);
+                $vehiculo->anio = trim($this->anio);
+                $vehiculo->fecha_ingreso = $this->fecha_ingreso;
+                $vehiculo->modelo_id = $this->modelo_id;
+                $vehiculo->save();
+                $this->resetForm();
+                $this->feedback = 'Vehículo actualizado';
+            }
+        } catch (Exception $e) {
+            $this->feedback = '';
+            if ($e->getCode() == 23000) {
+                $this->feedbackError = 'Ya existe un vehículo registrado con esta placa en el sistema';
+            } else {
+                $this->feedbackError = 'No se pudo actualizar el vehículo';
+            }
         }
     }
 
     public function destroy($id)
     {
-        MVehiculo::destroy($id);
-        $this->resetForm();
-        $this -> feedback = 'Vehículo eliminado';
+        try {
+            MVehiculo::destroy($id);
+            $this->resetForm();
+            $this->feedback = 'Vehículo eliminado';
+        } catch (Exception $e) {
+            $this->feedback = '';
+            $this->feedbackError = 'No se pudo eliminar el vehículo';
+        }
     }
 }
